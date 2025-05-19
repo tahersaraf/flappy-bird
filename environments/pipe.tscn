@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://7k7eb6kgh44p"]
+
+[ext_resource type="Texture2D" uid="uid://bfoqojlvxrdor" path="res://sprites/pipe-green.png" id="1_mkjye"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bm0ir"]
+size = Vector2(74, 490)
+
+[node name="Pipe" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 246)
+scale = Vector2(1.53846, 1.53846)
+texture = ExtResource("1_mkjye")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 247)
+shape = SubResource("RectangleShape2D_bm0ir")

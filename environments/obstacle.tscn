@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3y60xfvvrgvf"]
+
+[ext_resource type="Script" path="res://environments/obstacle.gd" id="1_ri1ah"]
+[ext_resource type="PackedScene" uid="uid://7k7eb6kgh44p" path="res://environments/pipe.tscn" id="1_vesoi"]
+[ext_resource type="AudioStream" uid="uid://cimi042v630p0" path="res://audio/point.wav" id="3_8bluc"]
+[ext_resource type="AudioStream" uid="uid://dkbay3scph1nt" path="res://audio/die.wav" id="4_8dy4s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7w6j"]
+size = Vector2(36, 1456)
+
+[node name="Obstacle" type="Node2D" groups=["obstacles"]]
+position = Vector2(0, 427)
+script = ExtResource("1_ri1ah")
+
+[node name="Pipe" parent="." instance=ExtResource("1_vesoi")]
+position = Vector2(0, 80)
+
+[node name="Pipe2" parent="." instance=ExtResource("1_vesoi")]
+position = Vector2(0, -80)
+rotation = 3.14159
+
+[node name="ScoreArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
+position = Vector2(16, 22)
+shape = SubResource("RectangleShape2D_u7w6j")
+
+[node name="Point" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8bluc")
+
+[node name="Die" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_8dy4s")
+
+[connection signal="body_entered" from="Pipe" to="." method="_on_pipe_body_entered"]
+[connection signal="body_entered" from="Pipe2" to="." method="_on_pipe_body_entered"]
+[connection signal="body_exited" from="ScoreArea" to="." method="_on_score_area_body_exited"]
